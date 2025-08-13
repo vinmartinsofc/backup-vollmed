@@ -29,7 +29,8 @@ public class Medico {
     @Embedded
     private Endereco endereco;
 
-    private Boolean ativo;
+    @Column(nullable = false, columnDefinition = "boolean default true")
+    private Boolean ativo = true;
 
     public Medico(DadosCadastroMedico dados) {
         this.ativo = true;
