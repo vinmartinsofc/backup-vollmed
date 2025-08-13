@@ -2,7 +2,7 @@ package med.voll.api.controller;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import med.voll.api.medico.*;
+import med.voll.api.domain.medico.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +21,6 @@ public class MedicoController {
     @PostMapping
     @Transactional
     public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroMedico dados, UriComponentsBuilder uriBuilder) {
-        System.out.println("=== Chamando POST /medicos ===");
 
         var medico = new Medico(dados);
 
@@ -35,6 +34,7 @@ public class MedicoController {
 
         @GetMapping
         public ResponseEntity<Page<DadosListagemMedico>> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao) {
+
          var page = repository.findAllByAtivoTrue(paginacao).map(DadosListagemMedico::new);
             return  ResponseEntity.ok(page);
         }
@@ -55,7 +55,7 @@ public class MedicoController {
            medico.excluir();
 
            return ResponseEntity.noContent().build();
-       }
+       } 
 
 
     @GetMapping("/{id}")
