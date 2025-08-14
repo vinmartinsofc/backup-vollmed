@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -21,8 +22,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("test")
+@TestPropertySource(properties = {
+        "spring.flyway.clean-disabled=false",
+        "spring.flyway.repair-on-migrate=true"
+})
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class MedicoRepositoryTest {
 
 
@@ -98,6 +103,7 @@ class MedicoRepositoryTest {
                 null
         );
     }
+
 
 
 

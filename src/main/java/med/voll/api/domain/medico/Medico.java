@@ -35,7 +35,7 @@ public class Medico {
     public Medico(DadosCadastroMedico dados) {
         this.ativo = true;
         this.nome = dados.nome();
-        this.email = dados.nome();
+        this.email = dados.email();
         this.telefone = dados.telefone();
         this.crm = dados.crm();
         this.endereco = new Endereco(dados.endereco());
